@@ -3,6 +3,7 @@ import org.apache.spark.api.java.JavaSparkContext;
 import scala.Tuple2;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class TrendingTopicsSpark {
@@ -11,6 +12,11 @@ public class TrendingTopicsSpark {
                 .setAppName("calcularTrendingTopics")
                 .setMaster("local[5]");
         final JavaSparkContext conexion = new JavaSparkContext(configuracionDelClusterDeSpark);
+
+        // Vamos a tener una lista de palabras prohibidas
+        // Caca Culo Pedo Pis Mierda
+        final List<String> palabrotas = Arrays.asList("CACA", "CULO", "PEDO","PIS", "MIERDA");
+        // Si tengo un hashtag que contenga alguna de esas palabras, lo elimino
 
         conexion.parallelize(Arrays.asList(  "En la piscina,#goodVibes#SummerLove",
                 "En el trabajo.#goodVibes(#MierdaDeVerano)",
@@ -22,6 +28,7 @@ public class TrendingTopicsSpark {
                 .flatMap( tweet -> Arrays.asList(tweet.split("[^\\w#]+")).iterator())
                 .filter( termino -> termino.startsWith("#") ) // Quedarme con los que empiezan por cuadradito
                 .map( String::toUpperCase) // normalizarlo
+                .filter( hashtag -> palabrotas.stream().filter( palabrota -> hashtag.contains(palabrota) ).count() == 0)
                 .mapToPair ( hashTag -> new Tuple2<>(hashTag, 1) )// Añado a cada hashtag un 1
                 .reduceByKey( Integer::sum )// Sumo los valores de los hashtag iguales
                 .mapToPair( tupla -> new Tuple2<>(tupla._2, tupla._1) )// Uso como clave el numero
