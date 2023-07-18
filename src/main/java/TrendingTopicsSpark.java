@@ -1,5 +1,6 @@
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
+import scala.Tuple2;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
@@ -16,12 +17,31 @@ public class TrendingTopicsSpark {
                 "Dando un paseo al perro-#GooDVIBES",
                 "En la playita !!!!"))
                 .filter( tweet -> tweet.contains("#") ) // filtramos solo los que contengan almohadilla
+                // Apuntar que en el rrd más adelante se aplique una función de filtro que acabamos de definir
                 .map( tweet -> tweet.replaceAll("#", " #") ) // Añadir espacio delante del #
                 .flatMap( tweet -> Arrays.asList(tweet.split("[^\\w#]+")).iterator())
                 .filter( termino -> termino.startsWith("#") ) // Quedarme con los que empiezan por cuadradito
-                .map( String::toUpperCase) // normalizarlos
-                .collect()
+                .map( String::toUpperCase) // normalizarlo
+                .mapToPair ( hashTag -> new Tuple2<>(hashTag, 1) )// Añado a cada hashtag un 1
+                .reduceByKey( Integer::sum )// Sumo los valores de los hashtag iguales
+                .mapToPair( tupla -> new Tuple2<>(tupla._2, tupla._1) )// Uso como clave el numero
+                .sortByKey(false)// Para ordenar por él
+                .mapToPair( tupla -> new Tuple2<>(tupla._2, tupla._1) )// Y le doy la vuela para acabar
+                .take(5)    // Me que con 5
                 .forEach( System.out::println );
+        // (a,b) -> a + b
+
+
+                /*
+                a   1
+                a   1
+                a   1
+                b   1
+                a   1
+                .collect()
+                // ^ Ese collect es el que manda por RED las funciones que hay que ejecutar en los nodos sobre los datos
+                // Aquí también mandamos los datos !
+                .forEach( System.out::println );*/
 
         conexion.close();
     }
