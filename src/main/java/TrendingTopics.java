@@ -20,12 +20,26 @@ public class TrendingTopics {
                 tweetsConHashtagsSeparados.flatMap( tweet -> Arrays.stream(tweet.split("[^\\w#]+")));
 
         Stream<String> hashtags =
-            tweetsConTerminosSeparados.filter( termino -> termino.startsWith("#") ); // Quedarme con los que empiezan por cuadradito
+                tweetsConTerminosSeparados.filter( termino -> termino.startsWith("#") ); // Quedarme con los que empiezan por cuadradito
 
         Stream<String> hashtagsNormalizados =
-            hashtags.map( String::toUpperCase); // normalizarlos
+                hashtags.map( String::toUpperCase); // normalizarlos
 
         hashtagsNormalizados.forEach( System.out::println );
+
+        Arrays.asList(  "En la piscina,#goodVibes#SummerLove",
+                "En el trabajo.#goodVibes(#MierdaDeVerano)",
+                "Dando un paseo al perro-#GooDVIBES",
+                "En la playita !!!!")
+                .stream() // Para cada tweet
+                .filter( tweet -> tweet.contains("#") ) // filtramos solo los que contengan almohadilla
+                .map( tweet -> tweet.replaceAll("#", " #") ) // Añadir espacio delante del #
+                .flatMap( tweet -> Arrays.stream(tweet.split("[^\\w#]+")))
+                .filter( termino -> termino.startsWith("#") ) // Quedarme con los que empiezan por cuadradito
+                .map( String::toUpperCase) // normalizarlos
+                .forEach( System.out::println );
+
+
     }
 
 }
