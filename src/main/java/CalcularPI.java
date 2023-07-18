@@ -7,7 +7,7 @@ public class CalcularPI {
         final long NUMERO_TOTAL_DE_DARDOS = 10L * 1000 * 1000;
         // Tirar un numero Enorme de dardos aleatorios
         long dardosEnLaDiana = LongStream.range(0, NUMERO_TOTAL_DE_DARDOS)   // Para cada tirada
-                //.parallel()                                                 // Todos los dardos los quiero tirar en paralelo
+                .parallel()                                                 // Todos los dardos los quiero tirar en paralelo
                 .mapToObj(numeroDeTirada -> new Dardo())                    // Tiro dardo
                 .filter( Dardo:: estaEnLaDiana )                            // Me quedo con los que están dentro
                 .count();                                                   // Los cuento
@@ -21,7 +21,7 @@ public class CalcularPI {
         private final double x= Math.random();
         private final double y = Math.random();
         public boolean estaEnLaDiana(){
-            return Math.sqrt( x*x + y * y ) <= 1;
+            return Math.sqrt( x * x + y * y ) <= 1;
         }
     }
 }
