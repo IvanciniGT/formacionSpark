@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.*;
 import java.util.stream.Collectors;
@@ -76,7 +77,7 @@ public class ProgramacionFuncional {
         // Cualquier Stream lo puedo convertir a una Collection, mediante la función .collect(Collector)
         // Collector, que básicamente me dice a que tipo de Collection quiero convertir el Stream
 
-        List<String> miLista = List.of("hola1","HOLA2", "Hola3");
+        List<String> miLista = Arrays.asList("hola1","HOLA2", "Hola3");//;List.of("hola1","HOLA2", "Hola3");
 
         // Hasta Java 1.5 , cómo itero eso, para mostrarlo por pantalla?
         for(int i = 0;i<miLista.size();i++) {
@@ -107,7 +108,7 @@ public class ProgramacionFuncional {
         // Funciones tipo reduce: reduce, forEach: Funciones que dado un stream generan algo que no es un Stream(lo cual incluye no devolver nada)
         // Las funciones de tipo map, se ejecutan en modo Lazy, siempre!... y ahora os aclaro esto!
 
-        List<Integer> numeritos = List.of(1,2,3,4,5,6,7,8,9);
+        List<Integer> numeritos = Arrays.asList(1,2,3,4,5,6,7,8,9);//List.of(1,2,3,4,5,6,7,8,9);
         List<Integer> nuevaLista = numeritos.parallelStream() // Quiero que que crees tantos hilos com ocores tengo en la máquina y repartas las tareas entre ellos... y esperes al resultado conjunto, cuando todos acaben,
                 .filter( numero -> numero %2 == 0) // Que hace esta linea realmente?
                                                     // Crea un nuevo stream con

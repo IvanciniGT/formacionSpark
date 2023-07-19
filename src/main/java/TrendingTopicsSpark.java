@@ -29,6 +29,7 @@ public class TrendingTopicsSpark {
                 .filter( termino -> termino.startsWith("#") ) // Quedarme con los que empiezan por cuadradito
                 .map( String::toUpperCase) // normalizarlo
                 .filter( hashtag -> palabrotas.stream().filter( palabrota -> hashtag.contains(palabrota) ).count() == 0)
+
                 .mapToPair ( hashTag -> new Tuple2<>(hashTag, 1) )// Añado a cada hashtag un 1
                 .reduceByKey( Integer::sum )// Sumo los valores de los hashtag iguales
                 .mapToPair( tupla -> new Tuple2<>(tupla._2, tupla._1) )// Uso como clave el numero
@@ -36,6 +37,9 @@ public class TrendingTopicsSpark {
                 .mapToPair( tupla -> new Tuple2<>(tupla._2, tupla._1) )// Y le doy la vuela para acabar
                 .take(5)    // Me que con 5
                 .forEach( System.out::println );
+
+                // Tabla HASTAGS , columna hashtag
+                // SELECT hashtag, COUNT(hashtag) FROM Hashtags ORDER BY COUNT(hashtag) DESC;
         // (a,b) -> a + b
 
 

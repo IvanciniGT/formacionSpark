@@ -22,6 +22,18 @@
             <artifactId>spark-core_2.13</artifactId>
             <version>3.4.1</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core -->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_2.13</artifactId>
+            <version>3.4.1</version>
+            <!-- Scope indica cuando se va a usar la dependencia
+                   compile  Solo necesito la librería para compilar: lombok, map-struct
+                   test                                              junit
+                   runtime      Esto implica que cuando se distribuye el artefacto, esa librería debe suministrarse
+                   provided     Significa que la libreria se usa en entorno de ejecución (runtime) pero que la MV donde corramos el programa, ya debe tener esa librería precargada por otro lado.
+            -->
+        </dependency>
 
     </dependencies>
 </project>
