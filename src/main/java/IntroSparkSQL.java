@@ -1,5 +1,8 @@
+import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SQLContext;
 import org.apache.spark.sql.SparkSession;
 
 import static org.apache.spark.sql.functions.col;
@@ -31,8 +34,28 @@ public class IntroSparkSQL {
         Dataset<Row> resultado = conexion.sql("SELECT nombre, apellidos, edad+5 FROM personas WHERE edad > 30 ORDER BY edad desc");
         resultado.show();
 
+        // Dataset<Row> -> JavaRDD<Persona>
         // Cerrar la conexión
+        JavaRDD<Persona> personasRDD = personas.toJavaRDD().map( IntroSparkSQL::row2Persona );
+        personasRDD.collect().forEach(System.out::println);
+
+        Dataset<Row> personas2 = conexion.createDataFrame(personasRDD, Persona.class);
+        personas2.show();
+
+        JavaSparkContext miContexto = JavaSparkContext.fromSparkContext(conexion.sparkContext());
+        SparkSession session2 = SparkSession.builder().config(miContexto.getConf()).getOrCreate();
         conexion.stop();
+    }
+
+    // Mapeador
+    public static Persona row2Persona(Row fila){
+        Persona p = new Persona();
+        p.setNombre(fila.get(fila.fieldIndex("nombre")).toString());
+        p.setApellidos(fila.get(fila.fieldIndex("apellidos")).toString());
+        p.setEmail(fila.get(fila.fieldIndex("email")).toString());
+        p.setEdad((int) fila.getLong(fila.fieldIndex("edad")));
+        p.setDni(fila.get(fila.fieldIndex("dni")).toString());
+        return p;
     }
 
 }

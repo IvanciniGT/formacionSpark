@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="25a0b56d-08c7-4ffe-a657-67e35fb26beb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/notas/dia3.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/IntroSparkSQL.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/personas.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Persona.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ProgramacionFuncional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ProgramacionFuncional.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/IntroSparkSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IntroSparkSQL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TrendingTopicsSpark.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrendingTopicsSpark.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -116,7 +114,7 @@
       <option name="presentableId" value="Default" />
       <updated>1689608722846</updated>
       <workItem from="1689608724317" duration="6693000" />
-      <workItem from="1689670631993" duration="19938000" />
+      <workItem from="1689670631993" duration="22901000" />
     </task>
     <servers />
   </component>

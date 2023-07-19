@@ -12,7 +12,6 @@ public class TrendingTopicsSpark {
                 .setAppName("calcularTrendingTopics")
                 .setMaster("local[5]");
         final JavaSparkContext conexion = new JavaSparkContext(configuracionDelClusterDeSpark);
-
         // Vamos a tener una lista de palabras prohibidas
         // Caca Culo Pedo Pis Mierda
         final List<String> palabrotas = Arrays.asList("CACA", "CULO", "PEDO","PIS", "MIERDA");

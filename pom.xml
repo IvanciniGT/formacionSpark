@@ -34,6 +34,13 @@
                    provided     Significa que la libreria se usa en entorno de ejecución (runtime) pero que la MV donde corramos el programa, ya debe tener esa librería precargada por otro lado.
             -->
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.28</version>
+            <scope>provided</scope>
+        </dependency>
 
     </dependencies>
 </project>
