@@ -12,6 +12,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.apache.spark.sql.functions.col;
+
 public class TrendingTopicsSparkSQL {
     public static void main(String[] args){
         SparkSession conexion = SparkSession.builder()
@@ -42,7 +44,7 @@ public class TrendingTopicsSparkSQL {
         Dataset<Row> hashtagsDataset =  conexion.createDataFrame(hashtags, Hashtag.class);
 
 
-        hashtagsDataset.groupBy("hashtag").count().show();
+        hashtagsDataset.groupBy("hashtag").count().sort(col("count").desc()).show();
 
                 // Tabla HASTAGS , columna hashtag
                 // SELECT hashtag, COUNT(hashtag) FROM Hashtags ORDER BY COUNT(hashtag) DESC;
