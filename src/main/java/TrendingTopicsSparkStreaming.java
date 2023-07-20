@@ -9,8 +9,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TrendingTopicsSparkStreaming {
-    public static void main(String[] args)  {
 
+    public static void main(String[] args)  {
         JavaStreamingContext contextoDeStreaming =
                 JavaStreamingContext.getOrCreate("checkpoint",
                         TrendingTopicsSparkStreaming::configurarUnStreamingContext);
