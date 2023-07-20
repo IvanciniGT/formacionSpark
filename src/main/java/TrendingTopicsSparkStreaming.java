@@ -1,5 +1,6 @@
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.broadcast.Broadcast;
 import org.apache.spark.streaming.Durations;
 import org.apache.spark.streaming.api.java.JavaDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
@@ -27,7 +28,9 @@ public class TrendingTopicsSparkStreaming {
                 .setMaster("local[5]");
         final JavaStreamingContext conexion = new JavaStreamingContext(configuracionDelClusterDeSpark, Durations.seconds(10));
         final List<String> palabrotas = Arrays.asList("CACA", "CULO", "PEDO","PIS", "MIERDA");
-
+        Broadcast<List<String>> palabrotasBroadcasteadas = conexion.sparkContext().broadcast(palabrotas);
+        // Esto me asegura que el dato es mandado SOLAMENTE 1 vez a cada nodo
+        // De forma que en sucesivas ejecuciones del proceso, el dato no hay que volver a mandarlo
         JavaDStream<String> tweets = conexion.socketTextStream("localhost",9999);
         tweets
                 .filter( tweet -> tweet.contains("#") )
@@ -35,7 +38,8 @@ public class TrendingTopicsSparkStreaming {
                 .flatMap( tweet -> Arrays.asList(tweet.split("[^\\w#]+")).iterator())
                 .filter( termino -> termino.startsWith("#") )
                 .map( String::toUpperCase)
-                .filter( hashtag -> palabrotas.stream().filter( palabrota -> hashtag.contains(palabrota) ).count() == 0)
+                //.filter( hashtag -> palabrotas.stream().filter( palabrota -> hashtag.contains(palabrota) ).count() == 0)
+                .filter( hashtag -> palabrotasBroadcasteadas.value().stream().filter( palabrota -> hashtag.contains(palabrota) ).count() == 0)
                 .mapToPair ( hashTag -> new Tuple2<>(hashTag, 1) )
                 .reduceByKey( Integer::sum )
                 .mapToPair( tupla -> new Tuple2<>(tupla._2, tupla._1) )

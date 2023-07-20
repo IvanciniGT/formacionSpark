@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="25a0b56d-08c7-4ffe-a657-67e35fb26beb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrendingTopicsSpark.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrendingTopicsSpark.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrendingTopicsSparkStreaming.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrendingTopicsSparkStreaming.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +56,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TrendingTopicsSpark">
+  <component name="RunManager" selected="Application.TrendingTopicsSparkStreaming">
     <configuration name="CalcularPISpark" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="CalcularPISpark" />
       <module name="formacionSpark" />
@@ -66,13 +66,6 @@
     </configuration>
     <configuration name="IntroSparkSQL" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="IntroSparkSQL" />
-      <module name="formacionSpark" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TrendingTopics" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="TrendingTopics" />
       <module name="formacionSpark" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -92,13 +85,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TrendingTopicsSparkStreaming" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TrendingTopicsSparkStreaming" />
+      <module name="formacionSpark" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TrendingTopicsSparkStreaming" />
         <item itemvalue="Application.TrendingTopicsSpark" />
         <item itemvalue="Application.CalcularPISpark" />
         <item itemvalue="Application.TrendingTopicsSparkSQL" />
         <item itemvalue="Application.IntroSparkSQL" />
-        <item itemvalue="Application.TrendingTopics" />
       </list>
     </recent_temporary>
   </component>
@@ -111,7 +111,7 @@
       <option name="presentableId" value="Default" />
       <updated>1689608722846</updated>
       <workItem from="1689608724317" duration="6693000" />
-      <workItem from="1689670631993" duration="36581000" />
+      <workItem from="1689670631993" duration="37276000" />
     </task>
     <servers />
   </component>
