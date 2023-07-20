@@ -1,4 +1,6 @@
 import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaPairRDD;
+import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.util.LongAccumulator;
 import scala.Tuple2;
@@ -19,7 +21,7 @@ public class TrendingTopicsSpark {
         final List<String> palabrotas = Arrays.asList("CACA", "CULO", "PEDO","PIS", "MIERDA");
         // Si tengo un hashtag que contenga alguna de esas palabras, lo elimino
         final LongAccumulator palabrasEliminadas = conexion.sc().longAccumulator();
-        conexion.parallelize(Arrays.asList(  "En la piscina,#goodVibes#SummerLove",
+        JavaPairRDD<String,Integer> hashtags = conexion.parallelize(Arrays.asList(  "En la piscina,#goodVibes#SummerLove",
                         "En el trabajo.#goodVibes(#MierdaDeVerano)",
                         "En el trabajo.#goodVibes(#CacaDeVerano)",
                         "En el trabajo.#goodVibes(#VeranoDePis)",
@@ -45,9 +47,11 @@ public class TrendingTopicsSpark {
                 .mapToPair( tupla -> new Tuple2<>(tupla._2, tupla._1) )// Uso como clave el numero
                 .sortByKey(false)// Para ordenar por él
                 .mapToPair( tupla -> new Tuple2<>(tupla._2, tupla._1) )// Y le doy la vuela para acabar
-                .take(5)    // Me que con 5
-                .forEach( System.out::println );
+                //.take(5)    // Me que con 5
+                //.forEach( System.out::println );
+                ;
 
+        hashtags.repartition(1).saveAsTextFile("fichero.txt");
 
         // Queremos el número de palabrotas detectadas y eliminadas
         System.out.println("Eliminadas:  " + palabrasEliminadas.count());
