@@ -12,7 +12,7 @@ public class CalcularPISpark {
 
 //      PASO 1: Abro una conexión con un cluster de Spark (con quien hablo, mi interlocutor, es el maestro)
         final SparkConf configuracionDelClusterDeSpark =new SparkConf()
-                .setAppName("calcularPI")
+                .setAppName("calcularPI");
                 // Aun no tenemos una instalación real de un cluster de Spark.
                 // GRacias a los chavalillos y chavalillas que hace Spark,
                 // tenemos un truquito, guay!!
@@ -21,8 +21,8 @@ public class CalcularPISpark {
                 //                                                      local[3]
                 //                                                      local[*]  = poner solo local
                 // siendo el número el número de cores que quiero que se usen de mi máquina en un cluster
-                // de juguete que se me va a automontar para pruebas.
-                .setMaster("local[5]");
+                // de juguete que se me va a automontar para pruebas
+                //.setMaster("spark://3.253.61.214:7077");
         // Esta es la conexión con el cluster!
         final JavaSparkContext conexion = new JavaSparkContext(configuracionDelClusterDeSpark);
 

@@ -1,7 +1,9 @@
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.util.LongAccumulator;
 import scala.Tuple2;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -16,9 +18,12 @@ public class TrendingTopicsSpark {
         // Caca Culo Pedo Pis Mierda
         final List<String> palabrotas = Arrays.asList("CACA", "CULO", "PEDO","PIS", "MIERDA");
         // Si tengo un hashtag que contenga alguna de esas palabras, lo elimino
-
+        final LongAccumulator palabrasEliminadas = conexion.sc().longAccumulator();
         conexion.parallelize(Arrays.asList(  "En la piscina,#goodVibes#SummerLove",
-                "En el trabajo.#goodVibes(#MierdaDeVerano)",
+                        "En el trabajo.#goodVibes(#MierdaDeVerano)",
+                        "En el trabajo.#goodVibes(#CacaDeVerano)",
+                        "En el trabajo.#goodVibes(#VeranoDePis)",
+                        "En el trabajo.#goodVibes(#CuloCacaPedoPis)",
                 "Dando un paseo al perro-#GooDVIBES",
                 "En la playita !!!!"))
                 .filter( tweet -> tweet.contains("#") ) // filtramos solo los que contengan almohadilla
@@ -27,8 +32,14 @@ public class TrendingTopicsSpark {
                 .flatMap( tweet -> Arrays.asList(tweet.split("[^\\w#]+")).iterator())
                 .filter( termino -> termino.startsWith("#") ) // Quedarme con los que empiezan por cuadradito
                 .map( String::toUpperCase) // normalizarlo
-                .filter( hashtag -> palabrotas.stream().filter( palabrota -> hashtag.contains(palabrota) ).count() == 0)
-
+                .filter( hashtag -> palabrotas.stream().filter( palabrota -> {
+                    boolean contienePalabrota = hashtag.contains(palabrota);
+                    if(contienePalabrota) {
+                        palabrasEliminadas.add(1);
+                        System.out.println("Palabrota detectada: "+ palabrota+" llevamos: "+palabrasEliminadas.count()+" palabrotas eliminadas");
+                    }
+                    return contienePalabrota;
+                } ).count() == 0)
                 .mapToPair ( hashTag -> new Tuple2<>(hashTag, 1) )// Añado a cada hashtag un 1
                 .reduceByKey( Integer::sum )// Sumo los valores de los hashtag iguales
                 .mapToPair( tupla -> new Tuple2<>(tupla._2, tupla._1) )// Uso como clave el numero
@@ -36,6 +47,10 @@ public class TrendingTopicsSpark {
                 .mapToPair( tupla -> new Tuple2<>(tupla._2, tupla._1) )// Y le doy la vuela para acabar
                 .take(5)    // Me que con 5
                 .forEach( System.out::println );
+
+
+        // Queremos el número de palabrotas detectadas y eliminadas
+        System.out.println("Eliminadas:  " + palabrasEliminadas.count());
 
                 // Tabla HASTAGS , columna hashtag
                 // SELECT hashtag, COUNT(hashtag) FROM Hashtags ORDER BY COUNT(hashtag) DESC;
@@ -55,4 +70,18 @@ public class TrendingTopicsSpark {
 
         conexion.close();
     }
+/*
+    public static class Contador implements Serializable {
+        private int cantidad;
+        public Contador() {
+            cantidad = 0;
+        }
+        public void incrementar(){
+            this.cantidad++;
+        }
+        public int valor(){
+            return this.cantidad;
+        }
+
+    }*/
 }
