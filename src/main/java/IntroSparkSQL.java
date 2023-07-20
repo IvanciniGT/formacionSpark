@@ -8,12 +8,16 @@ import static org.apache.spark.sql.functions.col;
 
 public class IntroSparkSQL {
 
+
+
+
     public static void main(String[] args){
         // Abrir una conexión con un cluster
         SparkSession conexion = SparkSession.builder()
                                             .appName("EjemploSQL")
                                             .master("local[4]")
                                             .getOrCreate();
+
         // Necesitaré hacerme con un objeto de datos en el cluster (RDD, Stream-> Dataset
         Dataset<Row> personas = conexion.read().json("src/main/resources/personas.json"); // De esta ruta hablaremos!
         // Configuraré operaciones

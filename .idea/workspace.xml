@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="25a0b56d-08c7-4ffe-a657-67e35fb26beb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/DNIsStreaming.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrendingTopicsSparkStreaming.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrendingTopicsSparkStreaming.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notas/dia4.md" beforeDir="false" afterPath="$PROJECT_DIR$/notas/dia4.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/IntroSparkSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IntroSparkSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/personas.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/personas.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +59,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TrendingTopicsSparkStreaming">
+  <component name="RunManager" selected="Application.DNIsStreaming">
     <configuration name="CalcularPISpark" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="CalcularPISpark" />
       <module name="formacionSpark" />
@@ -64,8 +67,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="IntroSparkSQL" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="IntroSparkSQL" />
+    <configuration name="DNIsStreaming" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="DNIsStreaming" />
       <module name="formacionSpark" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -94,11 +97,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.DNIsStreaming" />
         <item itemvalue="Application.TrendingTopicsSparkStreaming" />
         <item itemvalue="Application.TrendingTopicsSpark" />
         <item itemvalue="Application.CalcularPISpark" />
         <item itemvalue="Application.TrendingTopicsSparkSQL" />
-        <item itemvalue="Application.IntroSparkSQL" />
       </list>
     </recent_temporary>
   </component>
@@ -111,7 +114,7 @@
       <option name="presentableId" value="Default" />
       <updated>1689608722846</updated>
       <workItem from="1689608724317" duration="6693000" />
-      <workItem from="1689670631993" duration="37276000" />
+      <workItem from="1689670631993" duration="42441000" />
     </task>
     <servers />
   </component>
