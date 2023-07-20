@@ -24,8 +24,8 @@ public class TrendingTopicsSparkStreaming {
 
     private static JavaStreamingContext configurarUnStreamingContext(){
         final SparkConf configuracionDelClusterDeSpark =new SparkConf()
-                .setAppName("calcularTrendingTopics")
-                .setMaster("local[5]");
+                .setAppName("calcularTrendingTopics");
+                //.setMaster("local[5]");
         final JavaStreamingContext conexion = new JavaStreamingContext(configuracionDelClusterDeSpark, Durations.seconds(10));
         final List<String> palabrotas = Arrays.asList("CACA", "CULO", "PEDO","PIS", "MIERDA");
         Broadcast<List<String>> palabrotasBroadcasteadas = conexion.sparkContext().broadcast(palabrotas);
